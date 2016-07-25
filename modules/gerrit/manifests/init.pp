@@ -35,12 +35,12 @@ class gerrit (
     } -> Exec ['install_gerrit']
   }
 
-  if $install_java {
-    package{
-      $java_package:
-        ensure => installed,
-    } -> Exec ['install_gerrit']
-  }
+#  if $install_java {
+#    package{
+#      $java_package:
+#        ensure => installed,
+#    } -> Exec ['install_gerrit']
+#  }
 
   if $install_git {
     package{
