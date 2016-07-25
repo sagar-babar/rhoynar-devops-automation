@@ -6,13 +6,13 @@
   *Tested with Linux (Debian Jessie)*
 
 **Prerequisite:**
-* [Vagrant](https://www.vagrantup.com/downloads.html) >= 1.8.5
+### [Vagrant](https://www.vagrantup.com/downloads.html) >= 1.8.5
 
 Download URL's:
 - For [Mac](http://download.virtualbox.org/virtualbox/5.1.2/VirtualBox-5.1.2-108956-OSX.dmg) 
 - For [windows](http://download.virtualbox.org/virtualbox/5.1.2/VirtualBox-5.1.2-108956-Win.exe)
 
-* [Virual Box](https://www.virtualbox.org/wiki/Downloads) >= 5.1.2
+### [Virual Box](https://www.virtualbox.org/wiki/Downloads) >= 5.1.2
 
 Download URL's:
 - For [Mac](https://releases.hashicorp.com/vagrant/1.8.5/vagrant_1.8.5.dmg)
