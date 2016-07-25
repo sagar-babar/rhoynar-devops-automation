@@ -1,13 +1,13 @@
-node 'nodew.example.com'{
+node 'check1.example.com'{
         include jenkins
         include jenkins::master
 }
 
-node 'check1.example.com'{
+node 'check2.example.com'{
 include gerrit
 
 class { 'jenkins::slave':
-                 masterurl => 'http://node1.example.com:8080',
+                 masterurl => 'http://check1.example.com:8080',
                  ui_user => 'adminuser',
                  ui_pass => 'adminpass',
                 }
