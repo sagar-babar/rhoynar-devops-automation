@@ -143,11 +143,7 @@ define java::oracle (
   case $::architecture {
     'i386' : { $arch = 'i586' }
     'x86_64' : { $arch = 'x64' }
-<<<<<<< HEAD
     'amd64' : { $arch = 'x64' } 
-=======
-    'amd64' : { $arch = 'x64' }
->>>>>>> fdf8d15188cd020f50652d513f3f1911c9d50670
     default : {
       fail ("unsupported platform ${::architecture}")
     }
