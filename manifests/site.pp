@@ -1,11 +1,10 @@
-node 'check1.example.com'{
+node 'agent1.example.com'{
         include jenkins
         include jenkins::master
 }
 
-node 'check2.example.com'{
-include gerrit
-
+node 'agent2.example.com'{
+class { 'gerrit': }
 class { 'jenkins::slave':
                  masterurl => 'http://check1.example.com:8080',
                  ui_user => 'adminuser',
@@ -14,7 +13,7 @@ class { 'jenkins::slave':
 
 }
 
-node 'node2.example.com'{
+node 'agent3.example.com'{
 
 	class { 'postgresql::server': } ->
 	postgresql::server::db { 'jira':
@@ -32,10 +31,6 @@ node 'node2.example.com'{
 	class { 'jira':
  		javahome    => '/usr/java/jdk1.8.0_51',
  	}	
-}
-
-node 'node1.example.com'{
-include zuul
 }
 node default{
 	user {'test':
