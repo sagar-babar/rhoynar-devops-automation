@@ -3,7 +3,7 @@ node 'nodew.example.com'{
         include jenkins::master
 }
 
-node 'node2.example.com'{
+node 'check1.example.com'{
 include gerrit
 
 class { 'jenkins::slave':
@@ -12,9 +12,9 @@ class { 'jenkins::slave':
                  ui_pass => 'adminpass',
                 }
 
-#}
+}
 
-#node 'node2.example.com'{
+node 'node2.example.com'{
 
 	class { 'postgresql::server': } ->
 	postgresql::server::db { 'jira':
