@@ -1,6 +1,6 @@
 class gerrit (
   $source                   = "/opt/gerrit/gerrit-2.8.1.war",
-  $target                   = '/opt/gerrit', 
+  $target                   = '/opt/gerrit',
   $auth_type                = 'OPENID',
   $canonicalweburl          = 'http://127.0.0.1:8090/',
   $httpd_protocol           = 'http',
@@ -40,7 +40,7 @@ class gerrit (
 #      $java_package:
 #        ensure => installed,
 #    } -> Exec ['install_gerrit']
-#  }
+# }
 
   if $install_git {
     package{
@@ -48,23 +48,24 @@ class gerrit (
         ensure => installed,
     } -> Exec ['install_gerrit']
   }
+#  gerrit::folder { $target : } ->
+
 file{"${target}":
       ensure  => directory,
       owner   => $gerrit::user,
       group   => $gerrit::user,
       mode    => '0755',
-} ->  
+} ->
 exec {
    'wget_gerrit':
-	     command => "wget ${warsource} -P ${target}",
-    # timeout => 50,
+     command => "wget ${warsource} -P ${target}",
+     # timeout => 50,
      path    => '/usr/bin',
      onlyif  => "test ! -f /opt/gerrit/gerrit-2.8.1.war",
    } -> Exec ['install_gerrit']
-  
   exec {
     'install_gerrit':
-      command => "java -jar ${source} init --batch  -d ${target}",
+      command => "java -jar ${source} init -d ${target} --batch",
       creates => "${target}/bin/gerrit.sh",
       user    => $user,
       path    => $::path,
