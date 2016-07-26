@@ -144,7 +144,10 @@ define java::oracle (
     'i386' : { $arch = 'i586' }
     'x86_64' : { $arch = 'x64' }
     'amd64' : { $arch = 'x64' } 
+<<<<<<< HEAD
     'amd64' : { $arch = 'x64' }
+=======
+>>>>>>> 5bcd930d81e08a810c94e8167b61ddc3cbd5fc16
     default : {
       fail ("unsupported platform ${::architecture}")
     }
