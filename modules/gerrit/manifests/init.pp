@@ -48,8 +48,13 @@ class gerrit (
         ensure => installed,
     } -> Exec ['install_gerrit']
   }
-  
-  exec {
+file{"${target}":
+      ensure  => directory,
+      owner   => $gerrit::user,
+      group   => $gerrit::user,
+      mode    => '0755',
+} ->  
+exec {
    'wget_gerrit':
 	     command => "wget ${warsource} -P ${target}",
     # timeout => 50,
