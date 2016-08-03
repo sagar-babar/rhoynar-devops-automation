@@ -1,10 +1,6 @@
 class gerrit (
   $source                   = "/opt/gerrit/gerrit-2.8.1.war",
-<<<<<<< HEAD
-  $target                   = '/opt/gerrit', 
-=======
   $target                   = '/opt/gerrit',
->>>>>>> 5bcd930d81e08a810c94e8167b61ddc3cbd5fc16
   $auth_type                = 'OPENID',
   $canonicalweburl          = 'http://127.0.0.1:8090/',
   $httpd_protocol           = 'http',
@@ -53,11 +49,6 @@ class gerrit (
     } -> Exec ['install_gerrit']
   }
 #  gerrit::folder { $target : } ->
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 5bcd930d81e08a810c94e8167b61ddc3cbd5fc16
 file{"${target}":
       ensure  => directory,
       owner   => $gerrit::user,
