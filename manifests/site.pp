@@ -1,9 +1,4 @@
 node 'agent1.example.com'{
-        include jenkins
-        include jenkins::master
-}
-
-node 'agent2.example.com'{
 
 	class { 'postgresql::server': } ->
 	postgresql::server::db { 'jira':
@@ -21,6 +16,10 @@ node 'agent2.example.com'{
 	class { 'jira':
  		javahome    => '/usr/java/jdk1.8.0_51',
  	}	
+}
+node 'agent2.example.com'{
+        include jenkins
+        include jenkins::master
 }
 
 node 'agent3.example.com'{
