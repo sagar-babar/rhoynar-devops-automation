@@ -24,7 +24,7 @@ node 'agent2.example.com'{
 
 node 'agent3.example.com'{
 class { 'jenkins::slave':
-                 masterurl => 'http://check1.example.com:8080',
+                 masterurl => 'http://agent1.example.com:8080',
                  ui_user => 'adminuser',
                  ui_pass => 'adminpass',
                 } ->
