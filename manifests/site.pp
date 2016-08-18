@@ -30,6 +30,10 @@ class { 'jenkins::slave':
                 } ->
 class { 'gerrit': }
 }
+node 'agent4.example.com'
+{
+include zuul
+}
 node default{
 	user {'test':
 		ensure => 'present',
