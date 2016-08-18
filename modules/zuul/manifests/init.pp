@@ -64,17 +64,29 @@ class zuul (
   $sites = [],
   $nodes = [],
 ) {
-  include ::httpd
-  include ::pip
-
-  $packages = [
+  #include ::httpd
+  #include ::pip
+ $packages = [
     'python-paste',
     'python-webob',
+    'git',
+    'curl',
   ]
 
   package { $packages:
     ensure => present,
-  }
+  }->
+class{ 'httpd': }->
+class{ 'pip': }
+
+#  $packages = [
+ #   'python-paste',
+  #  'python-webob',
+#  ]
+
+ # package { $packages:
+  #  ensure => present,
+  #}
 
   # yappi, pyzmq requires this to build
   if ! defined(Package['build-essential']) {
