@@ -23,10 +23,10 @@ class zuul (
   $gearman_server = '127.0.0.1',
   $gearman_check_job_registration = true,
   $internal_gearman = true,
-  $gerrit_server = '',
-  $gerrit_user = '',
-  $gerrit_baseurl = '',
-  $zuul_ssh_private_key = '',
+  $gerrit_server = '172.31.16.172',
+  $gerrit_user = 'rhoynar',
+  $gerrit_baseurl = 'http://172.31.16.172:8090',
+  $zuul_ssh_private_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDtHCDAOyLL472mwEp0Kk5hoHMvbcMBRmtGWdOGwFi6xIMG8OHyigUacsX5wgGcnmskUzhMYCmB6WTg1v2fOtJ7JQ6Imc4Rf1px8jy296AFK0OIdmtIaTA0h1HTRdbTFT6aKP1DwN3s7D/Mywc1sO1RhtAuTij/SWY8o5h1w7ByS1HnvjoRpokoy/kWzMnbzmtSmHcaBA0nvTsZesFM6bmtC3EDZot4hBm4GrsPuOb+slcLhZJlEzFPOLthwI4lDG1fjea0wdbZ8BBnclw8NZdYOFYiO65/bGQaH5FpQIc0QyFTKHNAjvQHnSoO6hNpbcqPNpIe0LktnwH3hSXlBR5F root@agent3',
   $layout_file_name = 'layout.yaml',
   $url_pattern = '',
   $status_url = "https://${::fqdn}/",
@@ -64,9 +64,10 @@ class zuul (
   $sites = [],
   $nodes = [],
 ) {
-  #include ::httpd
-  #include ::pip
- $packages = [
+#  include ::httpd
+ # include ::pip
+
+  $packages = [
     'python-paste',
     'python-webob',
     'git',
@@ -78,15 +79,6 @@ class zuul (
   }->
 class{ 'httpd': }->
 class{ 'pip': }
-
-#  $packages = [
- #   'python-paste',
-  #  'python-webob',
-#  ]
-
- # package { $packages:
-  #  ensure => present,
-  #}
 
   # yappi, pyzmq requires this to build
   if ! defined(Package['build-essential']) {

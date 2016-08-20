@@ -16,8 +16,8 @@
 # == Class: zuul::server
 #
 class zuul::server (
-  $ensure = undef,
-  $layout_dir = '',
+  $ensure = running,
+  $layout_dir = '/etc/zuul/layout/',
   $manage_log_conf = true,
 ) {
   service { 'zuul':
@@ -96,3 +96,4 @@ class zuul::server (
     require => Service['zuul'],
   }
 }
+
