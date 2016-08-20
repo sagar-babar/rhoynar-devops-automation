@@ -17,7 +17,7 @@
 # == Class: zuul::launcher
 #
 class zuul::launcher (
-  $ensure = undef,
+  $ensure = running,
   $manage_log_conf = true,
 ) {
   service { 'zuul-launcher':
@@ -52,13 +52,13 @@ class zuul::launcher (
   }
 
   package { 'jenkins-job-builder':
-    ensure   => present,
+    ensure   => '1.6.1',
     provider => openstack_pip,
     require  => Class['pip'],
   }
 
   package { 'ansible':
-    ensure   => '2.1.0.0',
+    ensure   => '2.1.1.0',
     provider => openstack_pip,
     require  => Class['pip'],
   }
@@ -87,3 +87,4 @@ class zuul::launcher (
     require => Service['zuul-launcher'],
   }
 }
+

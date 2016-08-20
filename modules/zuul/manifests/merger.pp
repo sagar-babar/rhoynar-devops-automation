@@ -1,4 +1,4 @@
-# Copyright 2012-2013 Hewlett-Packard Development Company, L.P.
+#Copyright 2012-2013 Hewlett-Packard Development Company, L.P.
 # Copyright 2014 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -16,7 +16,7 @@
 # == Class: zuul::merger
 #
 class zuul::merger (
-  $ensure = undef,
+  $ensure = running,
   $manage_log_conf = true,
 ) {
   service { 'zuul-merger':
@@ -68,3 +68,4 @@ class zuul::merger (
     require => Service['zuul-merger'],
   }
 }
+
