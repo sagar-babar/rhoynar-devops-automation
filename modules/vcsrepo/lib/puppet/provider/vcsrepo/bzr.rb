@@ -3,7 +3,8 @@ require File.join(File.dirname(__FILE__), '..', 'vcsrepo')
 Puppet::Type.type(:vcsrepo).provide(:bzr, :parent => Puppet::Provider::Vcsrepo) do
   desc "Supports Bazaar repositories"
 
-  commands :bzr => 'bzr'
+  optional_commands   :bzr => 'bzr'
+  defaultfor :bzr => :exists
   has_features :reference_tracking
 
   def create
@@ -25,7 +26,7 @@ Puppet::Type.type(:vcsrepo).provide(:bzr, :parent => Puppet::Provider::Vcsrepo) 
   def destroy
     FileUtils.rm_rf(@resource.value(:path))
   end
-
+  
   def revision
     at_path do
       current_revid = bzr('version-info')[/^revision-id:\s+(\S+)/, 1]
@@ -45,33 +46,13 @@ Puppet::Type.type(:vcsrepo).provide(:bzr, :parent => Puppet::Provider::Vcsrepo) 
   end
 
   def revision=(desired)
-    at_path do
-      begin
-        bzr('update', '-r', desired)
-      rescue Puppet::ExecutionFailure
-        bzr('update', '-r', desired, ':parent')
-      end
-    end
-    update_owner
-  end
-
-  def latest
-    at_path do
-      bzr('version-info', ':parent')[/^revision-id:\s+(\S+)/, 1]
-    end
-  end
-
-  def latest?
-    at_path do
-      return self.revision == self.latest
-    end
+    bzr('update', '-r', desired, @resource.value(:path))
   end
 
   private
 
   def create_repository(path)
     bzr('init', path)
-    update_owner
   end
 
   def clone_repository(revision)
@@ -82,12 +63,6 @@ Puppet::Type.type(:vcsrepo).provide(:bzr, :parent => Puppet::Provider::Vcsrepo) 
     args.push(@resource.value(:source),
               @resource.value(:path))
     bzr(*args)
-    update_owner
   end
 
-  def update_owner
-    if @resource.value(:owner) or @resource.value(:group)
-      set_ownership
-    end
-  end
 end

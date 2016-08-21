@@ -21,7 +21,7 @@ Puppet::Type.newtype(:vcsrepo) do
 
   feature :ssh_identity,
           "The provider supports a configurable SSH identity file"
-
+          
   feature :user,
           "The provider can run as a different user"
 
@@ -31,44 +31,22 @@ Puppet::Type.newtype(:vcsrepo) do
   feature :multiple_remotes,
           "The repository tracks multiple remote repositories"
 
-  feature :configuration,
-          "The configuration directory to use"
-
-  feature :cvs_rsh,
-          "The provider understands the CVS_RSH environment variable"
-
-  feature :depth,
-          "The provider can do shallow clones"
-
-  feature :branch,
-          "The name of the branch"
-
-  feature :p4config,
-          "The provider understands Perforce Configuration"
-
-  feature :submodules,
-          "The repository contains submodules which can be optionally initialized"
-
-  feature :conflict,
-          "The provider supports automatic conflict resolution"
-
   ensurable do
     attr_accessor :latest
 
     def insync?(is)
       @should ||= []
-
       case should
-      when :present
-        return true unless [:absent, :purged, :held].include?(is)
-      when :latest
-        if is == :latest
-          return true
-        else
-          return false
-        end
-      when :bare
-        return is == :bare
+        when :present
+          return true unless [:absent, :purged, :held].include?(is)
+        when :latest
+          if is == :latest
+            return true
+          else
+            return false
+          end
+	when :bare
+	  return is == :bare
       end
     end
 
@@ -78,7 +56,7 @@ Puppet::Type.newtype(:vcsrepo) do
     end
 
     newvalue :bare, :required_features => [:bare_repositories] do
-      if !provider.exists?
+	  if !provider.exists?
         provider.create
       end
     end
@@ -88,12 +66,17 @@ Puppet::Type.newtype(:vcsrepo) do
     end
 
     newvalue :latest, :required_features => [:reference_tracking] do
-      if provider.exists? && !@resource.value(:force)
+      if provider.exists?
         if provider.respond_to?(:update_references)
           provider.update_references
         end
         if provider.respond_to?(:latest?)
-            reference = provider.latest || provider.revision
+            if resource.value(:revision) and provider.revision == resource.value(:revision)
+                reference = resource.value(:revision)
+            else
+                reference = provider.latest
+            end
+            notice reference
         else
           reference = resource.value(:revision) || provider.revision
         end
@@ -188,7 +171,7 @@ Puppet::Type.newtype(:vcsrepo) do
   newparam :identity, :required_features => [:ssh_identity] do
     desc "SSH identity file"
   end
-
+  
   newparam :module, :required_features => [:modules] do
     desc "The repository module to manage"
   end
@@ -198,37 +181,4 @@ Puppet::Type.newtype(:vcsrepo) do
     defaultto "origin"
   end
 
-  newparam :configuration, :required_features => [:configuration]  do
-    desc "The configuration directory to use"
-  end
-
-  newparam :cvs_rsh, :required_features => [:cvs_rsh] do
-    desc "The value to be used for the CVS_RSH environment variable."
-  end
-
-  newparam :depth, :required_features => [:depth] do
-    desc "The value to be used to do a shallow clone."
-  end
-
-  newparam :branch, :required_features => [:branch] do
-    desc "The name of the branch to clone."
-  end
-
-  newparam :p4config, :required_features => [:p4config] do
-    desc "The Perforce P4CONFIG environment."
-  end
-
-  newparam :submodules, :required_features => [:submodules] do
-    desc "Initialize and update each submodule in the repository."
-    newvalues(:true, :false)
-    defaultto true
-  end
-
-  newparam :conflict do
-    desc "The action to take if conflicts exist between repository and working copy"
-  end
-
-  autorequire(:package) do
-    ['git', 'git-core']
-  end
 end
