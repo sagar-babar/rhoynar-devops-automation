@@ -23,7 +23,7 @@ class zuul::server (
   service { 'zuul':
     ensure     => $ensure,
     name       => 'zuul',
-    enable     => true,
+#    enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/zuul'],
   }
@@ -42,7 +42,7 @@ class zuul::server (
     recurse => true,
     purge   => true,
     force   => true,
-    source  => $layout_dir,
+#    source  => $layout_dir,
     require => File['/etc/zuul'],
     notify  => Exec['zuul-reload'],
   }

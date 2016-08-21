@@ -23,7 +23,7 @@ class zuul::launcher (
   service { 'zuul-launcher':
     ensure     => $ensure,
     name       => 'zuul-launcher',
-    enable     => true,
+#    enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/zuul-launcher'],
   }
@@ -52,13 +52,13 @@ class zuul::launcher (
   }
 
   package { 'jenkins-job-builder':
-    ensure   => present,
+    ensure   => '1.6.1',
     provider => openstack_pip,
     require  => Class['pip'],
   }
 
   package { 'ansible':
-    ensure   => '2.1.0.0',
+    ensure   => '2.1.1.0',
     provider => openstack_pip,
     require  => Class['pip'],
   }
