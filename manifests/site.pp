@@ -92,6 +92,15 @@ node 'agent4.example.com'{
 				refreshonly => true,
 #				path => ['/usr/local/bin/zuul'],
 		}
+		class { 'zuul::params':
+        		project_name => 'project-one',
+        		jobs_name => 'dev-unit-tests-before-merge',
+        		jenkins_url => 'http://54.183.218.141:8080',
+        		jenkins_username => 'admin',
+        		jenkins_password => 'InitCr0n@blr560102',
+        		node => 'master',
+        		zuul_cloner_url => 'http://54.193.7.210:8090',
+		}
 }
 
 node default{
@@ -99,3 +108,5 @@ node default{
 				ensure => 'present',
 		}
 }
+
+
