@@ -30,6 +30,6 @@ puppet agent --enable
 sleep 3
 echo "Kindly wait $1 is fetching and applying catlogs from puppet master..!! DO NOT EXIT.."
 #echo `puppet agent --test` >> /dev/null 2>&1
-puppet agent --test 
+#puppet agent --test 
 
 exit 0
