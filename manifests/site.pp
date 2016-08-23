@@ -22,9 +22,38 @@ node 'agent1.example.com'{
 }
 
 node 'agent2.example.com'{
-    include jenkins
-    include jenkins::master
-    jenkins::plugin { 'git': }
+	    include jenkins
+    	    include jenkins::master
+    	    jenkins::plugin { 'git': }
+    	    jenkins::plugin { 'gerrit-trigger': }
+	    jenkins::plugin { 'ant': }
+	    jenkins::plugin { 'bouncycastle-api': }
+	    jenkins::plugin { 'branch-api': }
+	    jenkins::plugin { 'build-pipeline-plugin': }
+	    jenkins::plugin { '	build-timeout': }
+	    jenkins::plugin { 'build-with-parameters': }
+	    jenkins::plugin { 'conditional-buildstep': }
+	    jenkins::plugin { 'credentials-binding': }
+	    jenkins::plugin { 'credentials': }
+	    jenkins::plugin { 'durable-task': }
+	    jenkins::plugin { 'email-ext': }
+	    jenkins::plugin { 'envfile': }
+	    jenkins::plugin { 'external-monitor-job': }
+	    jenkins::plugin { 'cloudbees-folder': }
+	    jenkins::plugin { 'gearman-plugin': }
+	    jenkins::plugin { 'git-client': }
+	    jenkins::plugin { 'git-server': }
+	    jenkins::plugin { 'github-api': }
+	    jenkins::plugin { 'github-branch-source': }
+	    jenkins::plugin { 'github-organization-folder': }
+	    jenkins::plugin { 'jira-trigger	': }
+	    jenkins::plugin { 'JiraTestResultReporter': }
+	    jenkins::plugin { 'jira-ext': }
+	    jenkins::plugin { 'workflow-aggregator': }
+	    jenkins::plugin { 'ssh-slaves': }
+	    jenkins::plugin { 'timestamper': }
+	    jenkins::plugin { 'ws-cleanup': }
+	    jenkins::plugin { 'release-helper': }	
 }
 
 node 'agent3.example.com'{
