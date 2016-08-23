@@ -1,8 +1,9 @@
 class gerrit (
-  $source                   = "/opt/gerrit/gerrit-2.8.1.war",
   $target                   = '/opt/gerrit',
+  #$source                   = "/opt/gerrit/gerrit-2.8.1.war",
+  $source                   = "/opt/gerrit/gerrit-2.12.1.war",
   $auth_type                = 'OPENID',
-  $canonicalweburl          = 'http://127.0.0.1:8090/',
+  $canonicalweburl          = 'http://agent3.example.com:8090/',
   $httpd_protocol           = 'http',
   $httpd_hostname           = '*',
   $httpd_port               = 8090,
@@ -24,7 +25,8 @@ class gerrit (
   $mysql_java_package       = $gerrit::params::mysql_java_package,
   $user                     = 'gerrit',
   $extra_folders            = ['hooks', 'plugins'],
-  $warsource                = 'https://www.gerritcodereview.com/download/gerrit-2.8.1.war'
+#  $warsource                = 'https://www.gerritcodereview.com/download/gerrit-2.8.1.war'
+  $warsource                = 'https://gerrit-releases.storage.googleapis.com/gerrit-2.12.1.war'
 ) inherits gerrit::params {
 
   if $install_user {
@@ -60,12 +62,14 @@ exec {
      command => "wget ${warsource} -P ${target}",
      # timeout => 50,
      path    => '/usr/bin',
-     onlyif  => "test ! -f /opt/gerrit/gerrit-2.8.1.war",
+
+    #onlyif  => "test ! -f /opt/gerrit/gerrit-2.8.1.war",
+     onlyif  => "test ! -f /opt/gerrit/gerrit-2.12.1.war",
    } -> Exec ['install_gerrit']
   exec {
     'install_gerrit':
-      command => "java -jar ${source} init -d ${target} --batch",
-      creates => "${target}/bin/gerrit.sh",
+      command => "java -jar ${source} init -d /opt/gerrit/site --batch --install-plugin download-commands",
+      creates => "/opt/gerrit/site/bin/gerrit.sh",
       user    => $user,
       path    => $::path,
       require => Exec ['wget_gerrit'],
@@ -73,7 +77,7 @@ exec {
 
   exec {
     'reload_gerrit':
-     command     => "/opt/gerrit/bin/gerrit.sh stop && java -jar ${source} init --batch  -d ${target}",
+     command     => "/opt/gerrit/site/bin/gerrit.sh stop && java -jar ${source} init --batch  -d ${target}",
       refreshonly => true,
       user        => $user,
       path        => $::path,
@@ -84,8 +88,8 @@ exec {
     service {
       'gerrit':
         ensure    => running,
-        start     => "${target}/bin/gerrit.sh start",
-        stop      => "${target}/bin/gerrit.sh stop",
+        start     => "/opt/gerrit/site/bin/gerrit.sh start",
+        stop      => "/opt/gerrit/site/bin/gerrit.sh stop",
         hasstatus => false,
         pattern   => 'GerritCodeReview',
         provider  => 'base',
@@ -96,7 +100,7 @@ exec {
   gerrit::folder { $extra_folders : }
 
   Gerrit::Config {
-    file    => "${target}/etc/gerrit.config",
+    file    => "/opt/gerrit/site/etc/gerrit.config",
   }
 
   gerrit::config {
@@ -121,6 +125,11 @@ exec {
     'auth.type':
       ensure => present,
       value  => $auth_type,
+  }
+  gerrit::config {
+    'plugin.allowRemoteAdmin':
+      ensure => present,
+      value  => true  ,
   }
 
   gerrit::config {
