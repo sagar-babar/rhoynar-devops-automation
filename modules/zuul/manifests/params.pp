@@ -15,7 +15,7 @@ file { ['/etc/jenkins_jobs/','/etc/jenkins_jobs/jobs/']:
 #    ensure  => present,
 #    owner   => zuul,
 #    mode    => '0400',
-    content => template('zuul/id_rsa.erb'),
+#    content => template('zuul/id_rsa.erb'),
 #    require => File['/var/lib/zuul/ssh/'],
  # }
 file { '/etc/jenkins_jobs/jenkins_jobs.ini':
