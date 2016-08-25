@@ -73,7 +73,7 @@ node 'agent4.example.com'{
         		jenkins_username => 'admin',
         		jenkins_password => 'password',
         		node => 'master',
-        		zuul_cloner_url => 'http://agent2.example.com:8090',
+        		zuul_cloner_url => 'http://agent3.example.com:8090',
 		}
 }
 
