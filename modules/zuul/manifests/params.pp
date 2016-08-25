@@ -8,17 +8,22 @@ $node = '',
 $zuul_cloner_url = '',
 )  {
 
-file { ['/etc/jenkins_jobs/','/etc/jenkins_jobs/jobs/']:
+file { ['/etc/jenkins_jobs/','/etc/jenkins_jobs/jobs/',/var/lib/zuul/ssh/]:
     ensure  => directory,
     }
-    
+file { '/var/lib/zuul/ssh/id_rsa':
+    ensure  => present,
+    owner   => zuul,
+    mode    => '0400',
+    content => template('zuul/id_rsa.erb'),
+    require => File['/var/lib/zuul/ssh/'],
+  }
 file { '/etc/jenkins_jobs/jenkins_jobs.ini':
     ensure  => present,
     mode    => '0644',
     content => template('zuul/jenkins_jobs.ini.erb'),
     require => File['/etc/jenkins_jobs/'],
   }
-
 file { '/etc/jenkins_jobs/jobs/jjb.yaml':
     ensure  => present,
     mode    => '0644',
