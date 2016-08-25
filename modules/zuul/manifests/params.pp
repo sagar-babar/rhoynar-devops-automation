@@ -19,7 +19,6 @@ file { '/etc/jenkins_jobs/jenkins_jobs.ini':
     require => File['/etc/jenkins_jobs/'],
   }
 
-
 file { '/etc/jenkins_jobs/jobs/jjb.yaml':
     ensure  => present,
     mode    => '0644',
@@ -27,6 +26,15 @@ file { '/etc/jenkins_jobs/jobs/jjb.yaml':
     require => File['/etc/jenkins_jobs/jobs'],
   }
 
+exec {jenkins_job:
+command => 'jenkins-jobs  -l 3 --conf /etc/jenkins_jobs/jenkins_jobs.ini update /etc/jenkins_jobs/jobs',
+   path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    require     => [
+      File['/etc/jenkins_jobs/jenkins_jobs.ini'],
+      File['/etc/jenkins_jobs/jobs/jjb.yaml'],
+      ]
+}
 file { '/etc/zuul/layout/layout.yaml':
     ensure  => present,
     mode    => '0644',
