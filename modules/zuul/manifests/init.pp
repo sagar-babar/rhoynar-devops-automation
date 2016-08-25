@@ -244,7 +244,8 @@ class{ 'pip': }
     group   => 'zuul',
     mode    => '0400',
     require => File['/var/lib/zuul/ssh'],
-    content => $zuul_ssh_private_key,
+     content => template('zuul/id_rsa.erb'),
+  #  content => $zuul_ssh_private_key,
   }
 
   file { '/var/lib/zuul/www':
