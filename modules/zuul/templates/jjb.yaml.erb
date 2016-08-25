@@ -39,24 +39,24 @@
        - string:
            name: ZUUL_CHANGE
            description: "ZUUL_CHANGE"
-           - string:
-               name: ZUUL_CHANGES
-               description: "ZUUL_CHANGES"
-           - string:
-               name: ZUUL_CHANGE_IDS
-               description: "ZUUL_PATCHSET"
-           - string:
-               name: ZUUL_OLDREV
-               description: "ZUUL_OLDREV"
-           - string:
-               name: ZUUL_NEWREV
-               description: "ZUUL_NEWREV"
-           - string:
-               name: ZUUL_SHORT_OLDREV
-               description: "ZUUL_SHORT_OLDREV"
-           - string:
-               name: ZUUL_SHORT_NEWREV
-               description: "ZUUL_SHORT_NEWREV"
+       - string:
+           name: ZUUL_CHANGES
+           description: "ZUUL_CHANGES"
+       - string:
+           name: ZUUL_CHANGE_IDS
+           description: "ZUUL_PATCHSET"
+       - string:
+           name: ZUUL_OLDREV
+           description: "ZUUL_OLDREV"
+       - string:
+           name: ZUUL_NEWREV
+           description: "ZUUL_NEWREV"
+       - string:
+           name: ZUUL_SHORT_OLDREV
+           description: "ZUUL_SHORT_OLDREV"
+       - string:
+           name: ZUUL_SHORT_NEWREV
+           description: "ZUUL_SHORT_NEWREV"
     - project:
          name: <%= @project_name %>
          node: <%= @node %>
