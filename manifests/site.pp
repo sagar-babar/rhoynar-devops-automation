@@ -69,11 +69,11 @@ node 'agent4.example.com'{
 		class { 'zuul::params':
         		project_name => 'project-one',
         		jobs_name => 'dev-unit-tests-before-merge',
-        		jenkins_url => 'http://54.183.218.141:8080',
+        		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => 'admin',
-        		jenkins_password => 'InitCr0n@blr560102',
+        		jenkins_password => 'password',
         		node => 'master',
-        		zuul_cloner_url => 'http://54.193.7.210:8090',
+        		zuul_cloner_url => 'http://agent2.example.com:8090',
 		}
 }
 
