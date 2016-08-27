@@ -247,7 +247,22 @@ class{ 'pip': }
      content => template('zuul/id_rsa.erb'),
   #  content => $zuul_ssh_private_key,
   }
-
+  file { '/home/zuul/.ssh/id_rsa':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    require => User['zuul'],
+    content => template('zuul/id_rsa.erb'),
+  }
+  
+file { '/home/zuul/.ssh/config':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0644',
+    require => User['zuul'],
+     content => template('zuul/config.erb'),
+  }
+  
   file { '/var/lib/zuul/www':
     ensure  => directory,
     require => File['/var/lib/zuul'],
@@ -278,7 +293,7 @@ class{ 'pip': }
     provider => git,
     revision => 'v3.1.1',
     source   => 'https://github.com/twbs/bootstrap.git',
-  }
+  }is
 
   file { '/var/lib/zuul/www/bootstrap':
     ensure => absent
