@@ -5,7 +5,7 @@ class gerrit (
   $auth_type                = 'OPENID',
   $canonicalweburl          = 'http://agent3.example.com:8090/',
   $httpd_protocol           = 'http',
-  $httpd_hostname           = '*',
+  $httpd_hostname           = 'agent3.example.com',
   $httpd_port               = 8090,
   $configure_gitweb         = true,
   $database_backend         = 'h2',
