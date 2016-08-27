@@ -44,6 +44,8 @@ node 'agent4.example.com'{
 		class { 'zuul':
 				gerrit_server => 'agent3.example.com',
 				gerrit_user => 'testuser',
+				gearman_server => 'agent4.example.com',
+				zuul_url =>'http://agent4.example.com/p'
 				gerrit_baseurl => 'http://agent3.example.com:8090',
 				zuul_ssh_private_key => '/var/lib/zuul/ssh/id_rsa',
 		}->
