@@ -37,7 +37,11 @@ node 'agent3.example.com'{
     		ui_pass => 'adminpass',
 		} ->
 
-		class { 'gerrit': }
+		class { 'gerrit':
+		canonicalweburl => 'http://agent3.example.com:8090/',
+                httpd_hostname  => 'agent3.example.com',
+                httpd_port      => '8090',
+		}
 }
 
 node 'agent4.example.com'{
@@ -45,7 +49,7 @@ node 'agent4.example.com'{
 				gerrit_server => 'agent3.example.com',
 				gerrit_user => 'testuser',
 				gearman_server => 'agent4.example.com',
-				zuul_url =>'http://agent4.example.com/p'
+				zuul_url =>'http://agent4.example.com/p',
 				gerrit_baseurl => 'http://agent3.example.com:8090',
 				zuul_ssh_private_key => '/var/lib/zuul/ssh/id_rsa',
 		}->
