@@ -73,7 +73,7 @@ node 'agent4.example.com'{
 #				path => ['/usr/local/bin/zuul'],
 		}
 		class { 'zuul::known_hosts' :
-		known_hosts_content => '[agent3.example.com]:29418 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDYpCbp8xZQWxg0kferfHhIJpGhLJCxt8L1o7wtKwaWCABkta0USxsSgv86TtBF8NobLV6dYOEIjH8s6I/S0RwBLD9S4KusYyvLC8yRsr0lEB3vsGETsLgoR8Ml2TvgRvonspzgdB+93P58/l5MkPnNjYhVGN5GqQlEvCATMljpeQ==',
+		known_hosts_content => '',
 		}
 		class { 'zuul::params':
         		project_name => 'project-one',
