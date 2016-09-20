@@ -74,17 +74,13 @@ node 'agent4.example.com'{
 		known_hosts_content => '',
 		}
 		class { 'zuul::params':
-        		project_name => 'final-test',
-        		job1_name => 'dev-unit-tests-before-merge-prod',
-						job2_name => 'dev-unit-test-patchset',
-						job3_name => 'code-review-rejection',
-						job4_name => 'copy-dev-merge-to-prod',
+        		project_name => 'project-one',
+        		jobs_name => 'dev-unit-tests-before-merge',
         		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => '',
         		jenkins_password => '',
         		node => 'master',
         		zuul_cloner_url => 'http://agent3.example.com:8090',
-						git_push_url => 'agent3.example.com:8090',
 		}
 }
 
