@@ -1,11 +1,15 @@
 class zuul::params (
 $project_name = '',
-$jobs_name = '',
+$job1_name = '',
+$job2_name = '',
+$job3_name = '',
+$job4_name = '',
 $jenkins_url = '',
 $jenkins_username = '',
 $jenkins_password = '',
 $node = '',
 $zuul_cloner_url = '',
+$git_push_url = '',
 )  {
 
 file { ['/etc/jenkins_jobs/','/etc/jenkins_jobs/jobs/']:
@@ -44,5 +48,5 @@ file { '/etc/zuul/layout/layout.yaml':
     mode    => '0644',
     content => template('zuul/layout.yaml.erb'),
   }
-  
+
 }

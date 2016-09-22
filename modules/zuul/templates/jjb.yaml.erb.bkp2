@@ -3,7 +3,6 @@
      defaults: global
      builders:
        - shell: |
-           #!/bin/bash
            env
            echo "`date` Running Zuul job unit test"
            zuul-cloner <%= @zuul_cloner_url %> ${ZUUL_PROJECT}
@@ -66,16 +65,12 @@
      defaults: global
      builders:
        - shell: |
-           #!/bin/bash
            env
            echo "`date` Running Zuul job unit test"
            zuul-cloner <%= @zuul_cloner_url %> ${ZUUL_PROJECT}
            cd $ZUUL_PROJECT
-           ISSUE_ID=`git log --oneline | grep ${ZUUL_COMMIT:0:7}| awk '{print $2}' | cut -d'_' -f3`
-           echo $ISSUE_ID
-           trans_state=`/opt/atlassian-cli-5.0.0/atlassian.sh jira --action getTransitionList --issue "${ISSUE_ID}" | grep 'In Progress' | cut -d '"' -f6`
-           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "${ISSUE_ID}" --transition "$trans_state"
-           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action addComment --issue "${ISSUE_ID}" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}"
+           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "TEST-7" --transition "Start Progress"
+           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action addComment --issue "TEST-7" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}"
      parameters:
        - string:
            name: ZUUL_UUID
@@ -133,16 +128,12 @@
      defaults: global
      builders:
        - shell: |
-           #!/bin/bash
            env
            echo "`date` Running Zuul job unit test"
            zuul-cloner <%= @zuul_cloner_url %> ${ZUUL_PROJECT}
            cd $ZUUL_PROJECT
-           ISSUE_ID=`git log --oneline | grep ${ZUUL_COMMIT:0:7}| awk '{print $2}' | cut -d'_' -f3`
-           echo $ISSUE_ID
-           trans_state=`/opt/atlassian-cli-5.0.0/atlassian.sh jira --action getTransitionList --issue "${ISSUE_ID}" | grep 'To Do' | cut -d '"' -f6`
-           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "${ISSUE_ID}" --transition "$trans_state"
-           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action addComment --issue "${ISSUE_ID}" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}"
+           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "TEST-7" --transition "Reopen"
+           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action addComment --issue "TEST-7" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}"
      parameters:
        - string:
            name: ZUUL_UUID
@@ -200,22 +191,20 @@
      defaults: global
      builders:
        - shell: |
-           #!/bin/bash
            env
            echo `rm -rf /var/lib/jenkins/jobs/<%= @job4_name %>/workspace/<%= @project_name %>`
            git clone <%= @zuul_cloner_url %>/<%= @project_name %>
            cd <%= @project_name %>
            git merge origin/dev
            git push --repo http://admin:RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg@<%= @git_push_url %>/<%= @project_name %>
-           ISSUE_ID=`git log --oneline | grep ${ZUUL_COMMIT:0:7}| awk '{print $2}' | cut -d'_' -f3`
-           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "${ISSUE_ID}" --transition "DONE" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}" --resolution "Fixed"
-     parameters:
-       - string:
-           name: ZUUL_COMMIT
-           description: "ZUUL_COMMIT"
-       - string:
-           name: ZUUL_CHANGE
-           description: "ZUUL_CHANGE"
+           ISSUE=`git log | grep JIRA | awk 'FNR==1{print $1}' | cut -d'_' -f3`
+           if [ ${ISSUE} != "" ]
+           then
+           echo "in"
+           /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "TEST-7" --transition "DONE" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}" --resolution "Fixed"
+           else
+           echo "Issue Not Found in commit message"
+           fi
 - project:
     name: <%= @project_name %>
     node: <%= @node %>
