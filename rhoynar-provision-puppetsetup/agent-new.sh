@@ -1,7 +1,7 @@
 #!/bin/bash
 #This script designed for setup of puppet agent in debian jessie#
 export DEBIAN_FRONTEND=noninteractive
-while getopts ":m:H:a:h:n" OPTION
+while getopts ":m:H:a:h:i:" OPTION
 do
 	case $OPTION in
 		m)
@@ -17,7 +17,7 @@ do
         h)
             agentIP="${OPTARG}"
             ;;
-        n)
+        i)
             agentName="${OPTARG}"
             ;;
 
@@ -40,7 +40,7 @@ fi
 
 if [  "$agentInitial" == ""  ]
         then
-        echo "Agent name must be set in vagrantfile"
+        echo "Agent Initial must be set in vagrantfile"
         echo "Kindly destroy the newly launched box and try again with providing all required parameters in Vagrantfile"
         exit 1
 fi
@@ -57,14 +57,16 @@ if [  "$agentName" == ""  ]
         echo "Kindly destroy the newly launched box and try again with providing all required parameters in Vagrantfile"
         exit 1
 fi
-hostname1="$agentInitial"
+hostname1="$agentName"
 masterhost="$masterIP   $host1.example.com $host1 puppet"
 server='puppet'
 certname="$agentName.example.com"
 
+agent_count=1
+
 for agent in ${agentIP}
 do
-echo "${agent}  ${agentInitial}${agent_count}.example.com" >> /etc/hosts
+echo "${agent}  ${agentInitial}${agent_count}.example.com ${agentInitial}${agent_count}" >> /etc/hosts
 agent_count=$((agent_count+1))
 done
 
@@ -88,7 +90,7 @@ echo "certname = $certname" >> /etc/puppet/puppet.conf
 service puppet restart
 puppet agent --enable
 sleep 3
-echo "Kindly wait $1 is fetching and applying catlogs from puppet master..!! DO NOT EXIT.."
+echo "Kindly wait $agentName is fetching and applying catlogs from puppet master..!! DO NOT EXIT.."
 #echo `puppet agent --test` >> /dev/null 2>&1
 #puppet agent --test 
 
