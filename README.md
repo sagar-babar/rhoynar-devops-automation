@@ -103,7 +103,7 @@ node 'agent2.example.com'{
 }
 ```
 
-#### Overview
+### Overview
 
 Let us have an overview of our instances,
 
@@ -117,11 +117,11 @@ Let us have an overview of our instances,
 
 ---
 
-### Modules
+# Modules
 
 Let us explore each modules for detailed understanding,
 
-#### JIRA
+## JIRA
 
 As per our puppet module JIRA will be installed on *Agent1*
 
@@ -150,7 +150,7 @@ Setup JIRA by using the simple GUI as follows
   ![5](images/5.png)
 
 ---
-#### Jenkins master and slave
+## Jenkins master and slave
 
 Puppet Module will install Jenkins on Agent2, visit the instance IP with port 8080 to configure Jenkins [*192.168.35.2:8080*](https://192.168.35.2:8080)
 
@@ -168,12 +168,18 @@ Puppet Module will install Jenkins on Agent2, visit the instance IP with port 80
 
 * Now Jenkins is ready.
 
-#### Gerrit
+  ![8](images/8.png)
+
+---
+
+## Gerrit
 
 Gerrit is a code review tool which will be installed in Agent3 by puppet module.
 
 Visit the following IP with port 8090 to configure Gerrit.
 
-#### Zuul
+---
+
+## Zuul
 
 Puppet module will install Zuul in Agent4. Zuul is a pipeline oriented project gating and automation system.
