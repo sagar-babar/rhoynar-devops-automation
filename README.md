@@ -1,4 +1,4 @@
-# Rhoynar-devops-automation
+# Rhoynar-DevOps-Automation
 
 ## Vagrant with puppet node provisioning using shell script and puppet modules for  Gerrit, Zuul, Jenkins and JIRA.
 
@@ -117,7 +117,7 @@ Let us have an overview of our instances,
 
 ---
 
-# Modules
+# MODULES
 
 Let us explore each modules for detailed understanding,
 
@@ -183,3 +183,41 @@ Visit the following IP with port 8090 to configure Gerrit.
 ## Zuul
 
 Puppet module will install Zuul in Agent4. Zuul is a pipeline oriented project gating and automation system.
+
+---
+
+# SITE.PP
+
+Let us dig deep in each resource of site.pp
+
+## Agent1 - JIRA
+
+In this resource part the *Jira class* for installing JIRA and *postgresql class* for db server is configured along with username and password.
+
+![a1](images/a1.png)
+
+---
+
+## Agent2 - Jenkins
+
+In agent2 resource part Jenkins modules are included along with credentials of JIRA for integration as follows,
+
+![a2](images/a2.png)
+
+---
+
+## Agent3 - Gerrit
+
+Gerrit class is included in agent3 resource part with jenkins slave configuration for integration as shown below,
+
+![a3](images/a3.png)
+
+---
+
+## Agent4 - Zuul
+
+Resource part for agent4 includes Zuul with the following specifications for proper integration,
+
+![a4](images/a4.png)
+
+---
