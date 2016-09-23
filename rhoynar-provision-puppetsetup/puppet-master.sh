@@ -65,8 +65,13 @@ hostname $hostname1
 echo $masterhost >> /etc/hosts
 
 #installing puppetserver
+cd /tmp && wget https://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb
+sudo dpkg -i puppetlabs-release-pc1-jessie.deb
 /usr/bin/apt-get -y update
-/usr/bin/apt-get -y install puppetmaster
+/usr/bin/apt-get -y install puppet-agent
+/usr/bin/apt-get -y install puppetserver
+/usr/bin/apt-get puppetserver start
+PATH=/opt/puppetlabs/bin:$PATH;export PATH
 /usr/bin/apt-get -y install git
 agent_count=1
 for agent in ${agentIP}
@@ -86,7 +91,7 @@ echo "dns_alt_names = $dns_alt_name" >> /etc/puppet/puppet.conf
 echo "autosign = /etc/puppet/autosign.conf" >> /etc/puppet/puppet.conf
 
 # Starting puppetserver
-service puppetmaster restart
+service puppetserver restart
 cd /tmp/ && git clone https://github.com/sagarinitcron/rhoynar-devops-automation.git
 mv -f /tmp/rhoynar-devops-automation/* /etc/puppet/
 
