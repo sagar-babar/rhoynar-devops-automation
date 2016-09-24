@@ -37,6 +37,7 @@ command => 'jenkins-jobs  -l 3 --conf /etc/jenkins_jobs/jenkins_jobs.ini update 
     require     => [
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       File['/etc/jenkins_jobs/jobs/jjb.yaml'],
+      Class['::zuul'],
       ]
 }
 file { '/etc/zuul/layout/layout.yaml':
