@@ -248,21 +248,20 @@ class{ 'pip': }
   #  content => $zuul_ssh_private_key,
   }
   
-#  file { '/home/zuul/.ssh':
-#     ensure => directory,
-#     owner  => 'zuul',
-#     group  => 'zuul',
-#     require => User['zuul'],
-#  }
+  file { '/home/zuul/.ssh':
+     ensure => directory,
+     owner  => 'zuul',
+     group  => 'zuul',
+     require => User['zuul'],
+  }
   file { '/home/zuul/.ssh/id_rsa':
     owner   => 'zuul',
     group   => 'zuul',
     mode    => '0600',
-    require => Class['zuul::known_hosts'],
+    require => File['/home/zuul/.ssh'],
     content => template('zuul/id_rsa.erb'),
   }
-
-file { '/home/zuul/.ssh/config':
+  file { '/home/zuul/.ssh/config':
     owner   => 'zuul',
     group   => 'zuul',
     mode    => '0644',
