@@ -18,13 +18,13 @@
 class zuul::known_hosts (
   $known_hosts_content
 ) {
-  file { '/home/zuul/.ssh':
-    ensure  => directory,
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0700',
-    require => Class['::zuul'],
-  }
+  #file { '/home/zuul/.ssh':
+  #  ensure  => directory,
+  #  owner   => 'zuul',
+  #  group   => 'zuul',
+  #  mode    => '0700',
+  #  require => Class['::zuul'],
+  #}
   file { '/home/zuul/.ssh/known_hosts':
     ensure  => present,
     owner   => 'zuul',
