@@ -206,7 +206,7 @@
            git clone <%= @zuul_cloner_url %>/<%= @project_name %>
            cd <%= @project_name %>
            git merge origin/dev
-           git push --repo http://admin:RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg@<%= @git_push_url %>/<%= @project_name %>
+           git push --repo http://<%= @gerrit_usename %>:<%= @gerrit_password %>@<%= @git_push_url %>/<%= @project_name %>
            ISSUE_ID=`git log --oneline | grep ${ZUUL_COMMIT:0:7}| awk '{print $2}' | cut -d'_' -f3`
            /opt/atlassian-cli-5.0.0/atlassian.sh jira --action transitionIssue --issue "${ISSUE_ID}" --transition "DONE" --comment "<%= @zuul_cloner_url %>/#/c/${ZUUL_CHANGE}" --resolution "Fixed"
      parameters:

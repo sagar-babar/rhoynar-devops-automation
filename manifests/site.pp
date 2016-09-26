@@ -82,6 +82,8 @@ node 'agent4.example.com'{
         		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => '',
         		jenkins_password => '',
+						gerrit_usename => 'admin',
+						gerrit_password => 'RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg',
         		node => 'master',
         		zuul_cloner_url => 'http://agent3.example.com:8090',
 						git_push_url => 'agent3.example.com:8090',
