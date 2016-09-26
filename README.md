@@ -275,3 +275,43 @@ Resource part for agent4 includes Zuul with the following specifications for pro
 ![a4](images/a4.png)
 
 ---
+
+## Git-Review
+
+We use `git-review` tool for submitting git branches to gerrit for review.
+
+### Installation
+
+We use `pip` to install `git-review`
+
+```
+pip install git-review
+```
+
+### Setup
+
+By default, git-review will look for a remote named ‘gerrit’ for working with Gerrit. If the remote exists, git-review will submit the current branch to HEAD:refs/for/master at that remote.
+
+If the Gerrit remote does not exist, git-review looks for a file called .gitreview at the root of the repository with information about the gerrit remote. Assuming that file is present, git-review should be able to automatically configure your repository the first time it is run.
+
+The name of the Gerrit remote is configurable; see the configuration section below.
+
+### .gitreview configuration file
+
+Example .gitreview file (used to upload for git-review itself):
+
+```
+[gerrit]
+host=review.openstack.org
+port=29418
+project=openstack-infra/git-review.git
+defaultbranch=master
+```
+
+**Note:**
+
+Required values: host, project
+
+Optional values: port (default: 29418), defaultbranch (default: master), defaultremote (default: gerrit).
+
+*For more detailed informaton visit [`openstack-docs`](http://docs.openstack.org/infra/git-review/)*
