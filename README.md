@@ -145,9 +145,17 @@ Setup JIRA by using the simple GUI as follows
 
   ![4](images/4.png)
 
-* Configure mail id, avatar and finish installation with basic intro to JIRA. Once you're done with everything you can see JIRA dashboard.
+* Configure Email id, Avatar and finish installation with basic intro to JIRA. Once you're done with everything you can see JIRA dashboard.
 
   ![5](images/5.png)
+
+* Now let us add JIRA CLI Add-ons for interacting with JIRA using CLI, click gear icon on top right corner to add Add-ons.
+
+  ![j1](images/j1.png)
+
+* From the list of available Add-ons choose `JIRA Command Line Interface (CLI)` which is Atlassian Verified, to install it.
+
+  ![j2](images/j2.png)
 
 ---
 ## Jenkins master and slave
@@ -170,19 +178,65 @@ Puppet Module will install Jenkins on Agent2, visit the instance IP with port 80
 
   ![8](images/8.png)
 
+* Let us make connection with Gearman for interaction. Configure Gearman server IP and Listening port to establish connection with Gearman.
+
+  ![je1](images/je1.png)
+
+* After successful connection to Gearman with Jenkins we could see the list of Jobs created automatically in Jenkins Dashboard.
+
+  ![je2](images/je2.png)
+
 ---
 
 ## Gerrit
 
 Gerrit is a code review tool which will be installed in Agent3 by puppet module.
 
-Visit the following IP with port 8090 to configure Gerrit.
+* Visit the Gerrit IP with port 8090 to configure Gerrit by registering or signing in.
+
+  ![g1](images/g1.png)
+
+* Sign in to Gerrit with the existing account.
+
+  ![g2](images/g2.png)
+
+* After successful sign in we can edit settings.
+
+  ![g3](images/g3.png)
+
+* Under `profile` select username to setup.
+
+  ![g4](images/g4.png)
+
+  and confirm the username by selecting `OK`.
+
+  ![g5](images/g5.png)
+
+* Add a SSH public key to Gerrit under `SSH Public Keys`
+
+  ![g6](images/g6.png)
+
+* Generate HTTP Password for the user that we created under `HTTP Password` settings
+
+  ![g7](images/g7.png)
+
+* Create a new project under `Projects` section.
+
+  ![g8](images/g8.png)
+
+* Clone `test-project` from agent3 for testuser and choose `FALSE` for `Allow content merges`
+
+  ![g10](images/g10.png)
 
 ---
 
 ## Zuul
 
 Puppet module will install Zuul in Agent4. Zuul is a pipeline oriented project gating and automation system.
+
+After installation visit the IP for Zuul Dashboard.
+
+![z1](images/z1.png)
 
 ---
 
