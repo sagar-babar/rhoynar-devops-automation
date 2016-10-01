@@ -50,7 +50,7 @@ node 'agent3.example.com'{
 node 'agent4.example.com'{
 		class { 'zuul':
 			gerrit_server => 'agent3.example.com',
-			gerrit_user => 'testuser',
+			gerrit_user => 'admin',
 			gearman_server => 'agent4.example.com',
 			zuul_url =>'http://agent4.example.com/p',
 			gerrit_baseurl => 'http://agent3.example.com:8090',
@@ -73,7 +73,7 @@ node 'agent4.example.com'{
 		class { 'zuul::known_hosts' :
 		known_hosts_content => '',
 		}
-		class { 'zuul::params':
+		class { 'zuul::configs':
         		project_name => 'final-test',
         		job1_name => 'dev-unit-tests-before-merge-prod',
 			job2_name => 'dev-unit-test-patchset',
@@ -82,8 +82,8 @@ node 'agent4.example.com'{
         		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => '',
         		jenkins_password => '',
-						gerrit_usename => 'admin',
-						gerrit_password => 'RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg',
+			gerrit_usename => 'admin',
+			gerrit_password => 'RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg',
         		node => 'master',
         		zuul_cloner_url => 'http://agent3.example.com:8090',
 			git_push_url => 'agent3.example.com:8090',
