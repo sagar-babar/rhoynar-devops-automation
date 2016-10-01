@@ -326,7 +326,9 @@ Gerrit is a code review tool which will be installed in Agent3 by puppet module.
 
   ![g8](images/g8.png)
 
-* Clone `test-project` from agent3 for testuser and choose `FALSE` for `Allow content merges`
+* Clone `test-project` from agent3 for testuser and choose `FALSE` for `Require Change-Id in commit message`
+
+	![g9](images/g9.png)
 
   ![g10](images/g10.png)
 
