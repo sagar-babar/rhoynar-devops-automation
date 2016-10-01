@@ -1,4 +1,4 @@
-class zuul::params (
+class zuul::configs (
 $project_name = '',
 $job1_name = '',
 $job2_name = '',
