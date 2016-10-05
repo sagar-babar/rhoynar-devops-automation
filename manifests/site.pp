@@ -31,6 +31,7 @@ node 'agent2.example.com'{
   			password    => '',
   			jira_server => 'http://agent1.example.com:8080',
 		}
+		class { 'zuul': }
 }
 
 node 'agent3.example.com'{
@@ -82,8 +83,8 @@ node 'agent4.example.com'{
         		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => '',
         		jenkins_password => '',
-			gerrit_usename => 'admin',
-			gerrit_password => 'RqZx2ZaFAyJG+me3m75qgfw9gv86s9GpxDgRnoVRUg',
+			gerrit_usename => '',
+			gerrit_password => '',
         		node => 'master',
         		zuul_cloner_url => 'http://agent3.example.com:8090',
 			git_push_url => 'agent3.example.com:8090',
