@@ -66,6 +66,7 @@ echo $masterhost >> /etc/hosts
 
 #installing puppetserver
 /usr/bin/apt-get -y update
+#/usr/bin/apt-get -y install libssl1.0.0
 /usr/bin/apt-get -y install puppetmaster
 /usr/bin/apt-get -y install git
 agent_count=1
