@@ -79,6 +79,7 @@ echo $masterhost >> /etc/hosts
 
 #installing puppet-agent
  /usr/bin/apt-get -y update
+ #/usr/bin/apt-get -y install libssl1.0.0
  /usr/bin/apt-get -y install puppet
 
 #puppet configuration
