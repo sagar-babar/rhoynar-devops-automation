@@ -12,7 +12,7 @@
      parameters:
        - string:
            name: ZUUL_UUID
-           description: "ZUUL_UUID"
+           description: "ZUUL_UUID2"
        - string:
            name: ZUUL_REF
            description: "ZUUL_REF"
@@ -68,7 +68,7 @@
        - shell: |
            #!/bin/bash
            env
-           echo "`date` Running Zuul job unit test"
+           echo "`date` Running Zuul job unit test2"
            zuul-cloner <%= @zuul_cloner_url %> ${ZUUL_PROJECT}
            cd $ZUUL_PROJECT
            ISSUE_ID=`git log --oneline | grep ${ZUUL_COMMIT:0:7}| awk '{print $2}' | cut -d'_' -f3`
@@ -79,7 +79,7 @@
      parameters:
        - string:
            name: ZUUL_UUID
-           description: "ZUUL_UUID"
+           description: "ZUUL_UUID2"
        - string:
            name: ZUUL_REF
            description: "ZUUL_REF"
@@ -146,7 +146,7 @@
      parameters:
        - string:
            name: ZUUL_UUID
-           description: "ZUUL_UUID"
+           description: "ZUUL_UUID3"
        - string:
            name: ZUUL_REF
            description: "ZUUL_REF"
@@ -212,7 +212,7 @@
      parameters:
        - string:
            name: ZUUL_COMMIT
-           description: "ZUUL_COMMIT"
+           description: "ZUUL_COMMIT3"
        - string:
            name: ZUUL_CHANGE
            description: "ZUUL_CHANGE"

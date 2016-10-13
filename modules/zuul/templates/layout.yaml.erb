@@ -66,12 +66,12 @@ pipelines:
         - event: change-merged
 
 projects:
-  - name: <%= @project_name %>
+  - name: <%= @layout_project_name %>
     gate:
-      - <%= @job1_name %>
+      - <%= @gate_name %>
     check:
-      - <%= @job2_name %>
+      - <%= @check_name %>
     post-merge:
-      - <%= @job4_name %>
+      - <%= @post_merge_name %>
     check-reject:
-      - <%= @job3_name %>
+      - <%= @check_reject_name %>

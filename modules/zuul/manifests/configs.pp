@@ -12,6 +12,11 @@ $zuul_cloner_url = '',
 $git_push_url = '',
 $gerrit_usename = '',
 $gerrit_password = '',
+$layout_project_name = '',
+$gate_name = '',
+$check_name = '',
+$post_merge_name = '',
+$check_reject_name = '',
 )  {
 
 file { ['/etc/jenkins_jobs/','/etc/jenkins_jobs/jobs/']:
