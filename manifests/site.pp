@@ -75,19 +75,24 @@ node 'agent4.example.com'{
 		known_hosts_content => '',
 		}
 		class { 'zuul::configs':
-        		project_name => 'final-test',
-        		job1_name => 'dev-unit-tests-before-merge-prod',
-			job2_name => 'dev-unit-test-patchset',
-			job3_name => 'code-review-rejection',
-			job4_name => 'copy-dev-merge-to-prod',
+        		project_name => 'test-project',
+        		job1_name => 'merge-to-dev',
+			job2_name => 'unit-test',
+			job3_name => 'jira-state-transition',
+			job4_name => 'merge-to-master',
         		jenkins_url => 'http://agent2.example.com:8080',
         		jenkins_username => '',
         		jenkins_password => '',
-			gerrit_usename => '',
-			gerrit_password => '',
+			gerrit_usename => 'testuser',
+			gerrit_password => '8w5irbbAvwNtS8iMrJX96DgLxglmBkf4lnFJM+rhAg',
         		node => 'master',
         		zuul_cloner_url => 'http://agent3.example.com:8090',
 			git_push_url => 'agent3.example.com:8090',
+			layout_project_name => 'final-test',
+			gate_name => 'dev-unit-tests-before-merge-prod',
+			check_name => 'dev-unit-test-patchset',
+			post_merge_name => 'copy-dev-merge-to-prod',
+			check_reject_name => 'code-review-rejection',
 		}
 }
 
